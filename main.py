@@ -1,5 +1,5 @@
 from action import Action
-from solution import Solution
+from algo import Algo
 #import binIncrementer
 
 import csv
@@ -11,8 +11,8 @@ def main ():
     # sol_naive = Solution("action_panel.csv", 500)    
     # sol_naive.naive_solution_execute()
 
-    sol_brut = Solution("action_panel.csv", 500)
-    sol_brut.display_fbrut_solution()
+    sol_brut = Algo("action_panel.csv", 500)
+    sol_brut.display_fbrut_algo()
 
 
     
