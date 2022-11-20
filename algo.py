@@ -18,7 +18,7 @@ class Algo:
         action_selection = naive_solution(sorted_benefit, self.max_price)
         display_action_selection(action_selection)
 
-    def display_fbrut_algo(self):
+    def fbrut_algo_execute(self):
         self.bin_increment(1048576)        
 
     # ------- Getting datas into array 'data'-------

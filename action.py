@@ -1,4 +1,5 @@
 import csv
+import os
 
 
 with open('data_origin.csv', 'w', newline='') as file:
@@ -54,16 +55,20 @@ def calcul_and_write_benefit(self):
         benef = int(elt[1]) * int(ratio) / 100
         elt[2] = benef        
         action_panel.append([elt[0], elt[1], elt[2]])
-    #for elt in action_panel:
-        #write_to_csv('action_panel.csv', elt)
+
+    for elt in action_panel:
+        write_to_csv('action_panel.csv', elt)
     
 # ----------- Writing to new useable csv file ------------
 def write_to_csv(file, fields):
-    with open(file, 'a', newline='') as csvfile:
-        # creating a csv writer object
-        csvwriter = csv.writer(csvfile, delimiter=',')
-        # writing the data rows
-        csvwriter.writerow(fields)
+        if os.path.isfile(file):
+            pass
+        else:
+            with open(file, 'a', newline='') as csvfile:
+                # creating a csv writer object
+                csvwriter = csv.writer(csvfile, delimiter=',')
+                # writing the data rows
+                csvwriter.writerow(fields)
 
  
 calcul_and_write_benefit(file)
