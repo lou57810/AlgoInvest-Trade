@@ -29,7 +29,7 @@ with open('data_origin.csv', 'w', newline='') as file:
 
 
 class Action:
-        
+
 
     def __init__(self, name, price, benefit):        
         self.name = name
@@ -42,36 +42,38 @@ class Action:
     def __repr__(self):
         return str(self.name) + ' ' + str(self.price) + ' ' + str(self.benefit)
 
-def calcul_and_write_benefit(self):
-    temp = []
-    action_panel = []
-    with open('data_origin.csv', 'r') as file:
-        csv_reader = csv.reader(file)
-        for line in csv_reader:
-            temp.append(line)
+    def calcul_and_write_benefit(self, file):
+        temp = []
+        action_panel = []
+        with open('data_origin.csv', 'a') as file:
+            csv_reader = csv.reader(file)
+            for line in csv_reader:
+                temp.append(line)
             
-    for elt in temp:
-        ratio = (elt[2].split('%'))[0]
-        benef = int(elt[1]) * int(ratio) / 100
-        elt[2] = benef        
-        action_panel.append([elt[0], elt[1], elt[2]])
+        for elt in temp:
+            ratio = (elt[2].split('%'))[0]
+            benef = int(elt[1]) * int(ratio) / 100
+            elt[2] = benef        
+            action_panel.append([elt[0], elt[1], elt[2]])
 
-    for elt in action_panel:
-        write_to_csv('action_panel.csv', elt)
+        for elt in action_panel:
+            write_to_csv('action_panel.csv', elt)
+
+
     
 # ----------- Writing to new useable csv file ------------
-def write_to_csv(file, fields):
-        if os.path.isfile(file):
-            pass
-        else:
-            with open(file, 'a', newline='') as csvfile:
-                # creating a csv writer object
-                csvwriter = csv.writer(csvfile, delimiter=',')
-                # writing the data rows
-                csvwriter.writerow(fields)
+def write_to_csv(file, fields):    
+    if os.path.isfile(file):
+        pass
+    else:
+        with open(file, 'a', newline='') as csvfile:
+            # creating a csv writer object
+            csvwriter = csv.writer(csvfile, delimiter=',')
+            # writing the data rows
+            csvwriter.writerow(fields)
 
  
-calcul_and_write_benefit(file)
+
 
 
 
