@@ -42,6 +42,7 @@ class Action:
     def __repr__(self):
         return str(self.name) + ' ' + str(self.price) + ' ' + str(self.benefit)
 
+    '''
     def calcul_and_write_benefit(self, file):
         temp = []
         action_panel = []
@@ -58,6 +59,7 @@ class Action:
 
         for elt in action_panel:
             write_to_csv('action_panel.csv', elt)
+    '''
 
 
     

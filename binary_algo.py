@@ -27,8 +27,8 @@ class Binary:
             # j = valeur binaire (1/0) k index n° bit                
             if j == '1':            # poids binaire = 1                    
                 temp.append(panel_actions[k])                                    
-                somme_temp_prices += int(panel_actions[k].price)    # int * 100
-                somme_temp_benefits += int(panel_actions[k].benefit)                
+                somme_temp_prices += int(panel_actions[k].price) / 100    # int * 100
+                somme_temp_benefits += int(panel_actions[k].benefit) / 100                
             k -= 1
                 
         # Echange meilleure combinaison actions            
@@ -65,7 +65,7 @@ class Binary:
         for elt in tab:        
             somme1 += int(elt.price)
             somme2 += int(elt.benefit)
-            elt.benefit = int(elt.benefit)/100
+            
         print('Actions panel:', tab)
-        print('Prix total:', somme1)
+        print('Prix total:', somme1 / 100)
         print("Benefice total:", somme2 / 100)
