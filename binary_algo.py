@@ -1,21 +1,22 @@
 from action import Action
 import csv
+from algo import Algo
+from utils import get_datas, display_algo_data
 
-
-class Binary:
+       
+class Binary(Algo):
 
     def __init__(self, file, max_price):
-        self.file = file
-        self.max_price = max_price
+        super().__init__(file, max_price)        
         self.sumPrice = 0
         self.sumBenefit = 0
 
-    def fbrut_algo_execute(self):
-        data = self.get_datas(self.file)
-        self.bin_increment(2**len(data))
-        # Complexité: O(2**20)1048576
+    def algo_generic(self):
+        data = get_datas(self.file)
+        self.bin_increment(data, 2**len(data))        
+        display_algo_data(self.best_panel)
 
-	# ------------------ Brut Force Solution1 (binaire): ----------------    
+    # ------------------ Brut Force Solution1 (binaire): ----------------    
     def select_best_binary_value(self, val, panel_actions):  # val = bin(i)
         temp = []        
         
@@ -23,7 +24,7 @@ class Binary:
         somme_temp_prices = 0
         somme_temp_benefits = 0        
         
-        for j in val[0]:            
+        for j in val[0]:                    # ex:   val, val[0] ['11011001100101110'] 11011001100101110            
             # j = valeur binaire (1/0) k index n° bit                
             if j == '1':            # poids binaire = 1                    
                 temp.append(panel_actions[k])                                    
@@ -38,34 +39,11 @@ class Binary:
             self.best_panel = temp
         
     # Incrément binaire, et appel fct display_val
-    def bin_increment(self, max_value):        
-        panel_actions = self.get_datas(self.file)
+    def bin_increment(self, data, max_value):
+        panel_actions = data                # .csv en tableau actions    
         
         for i in range(max_value):            
-            val = bin(i)            
-            val = val[2:].split()
-            
-            self.select_best_binary_value(val, panel_actions)        
-        self.display_algo_data(self.best_panel)
+            val = bin(i)            # ex:  0b 1110110110010101            
+            val = val[2:].split()   # ex:  ['10111001110011000']            
+            self.select_best_binary_value(val, panel_actions)
 
-    # ------- Getting datas into array 'data'-------
-    def get_datas(self, file):        
-        data = []
-        with open(self.file, 'r') as file:
-            csv_reader = csv.reader(file)
-            for line in csv_reader:
-                action = Action(line[0], line[1], line[2])                
-                data.append(action)
-        
-        return data                                  # tableau des actions avec benefices non triés
-
-    def display_algo_data(self, tab):
-        somme1 = 0
-        somme2 = 0
-        for elt in tab:        
-            somme1 += int(elt.price)
-            somme2 += int(elt.benefit)
-            
-        print('Actions panel:', tab)
-        print('Prix total:', somme1 / 100)
-        print("Benefice total:", somme2 / 100)

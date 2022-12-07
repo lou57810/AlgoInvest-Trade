@@ -1,19 +1,19 @@
 from action import Action
-#from utils import Utils
+from utils import get_datas, display_algo_data
+from algo import Algo
 import csv
 
-class Greedy:
+class Greedy(Algo):
 
     def __init__(self, file, max_price):
-        self.file = file
-        self.max_price = max_price
-        
+        super().__init__(file, max_price)
 
-    def naive_solution_execute(self):        
-            data = self.get_datas(self.file)            # tableau des actions avec prix et benefices non triés            
-            sorted_benefit = self.sort_by_benefit(data)        
-            actions_selection = self.naive_solution(sorted_benefit, self.max_price)        
-            self.display_algo_data(actions_selection)
+    #def naive_solution_execute(self, file):                        
+    def algo_generic(self):        
+        data = get_datas(self.file)          # tableau des actions avec prix et benefices non triés
+        sorted_benefit = self.sort_by_benefit(data)        
+        actions_selection = self.naive_solution(sorted_benefit, self.max_price)        
+        display_algo_data(actions_selection)
 
     def sort_by_benefit(self, data):
             sorted_benefit = sorted(data, key=lambda action: action.benefit)        
@@ -29,24 +29,4 @@ class Greedy:
                     cumul_price += int(action.price)
             return action_selection
 
-    # ------- Getting datas into array 'data'-------
     
-    def get_datas(self, file):        
-        data = []
-        with open(self.file, 'r') as file:
-            csv_reader = csv.reader(file)
-            for line in csv_reader:                
-                action = Action(line[0], line[1], line[2])                                
-                data.append(action)        
-        return data
-
-    def display_algo_data(self, tab):
-        price = 0
-        benefit = 0
-        for elt in tab:        
-            price += int(elt.price) / 100
-            benefit += int(elt.benefit) / 100            
-        print('Actions panel:', tab)
-        print('Prix total:', price)
-        print("Benefice total:", benefit)
-
