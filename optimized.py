@@ -3,7 +3,7 @@ from algo import Algo
 import csv
 
 
-class Optidynalgo(Algo):
+class OptiAlgo(Algo):
 
 	
     def __init__(self, file, max_price):
@@ -12,11 +12,10 @@ class Optidynalgo(Algo):
         self.max_price = max_price
 
     def algo_generic(self):        
-        data = super().get_datas(self.file)            # tableau des actions avec prix et benefices non triés
+        data = self.get_datas(self.file)            # tableau des actions avec prix et benefices non triés
         self.dynamic_algo(data, self.max_price)        
     
-    def dynamic_algo(self, data, max_price):        
-        
+    def dynamic_algo(self, data, max_price):
         matrice = [[1 for x in range(max_price + 1)] for x in range(len(data) + 1)]  # Initialisation de la matrice à 0/x et 0/y
         # liste action en x et poids/valeurs en y
         for i in range(1, len(data) + 1):               # parcours des y actions            
@@ -37,7 +36,7 @@ class Optidynalgo(Algo):
                 actions_selection.append(e)            
                 w -= round(float(float(e.price)))
             n -= 1
-        #print('action_selection:', actions_selection)
+        print('action_selection:', actions_selection)
         super().display_algo_data(actions_selection)    
         #return matrice[-1][-1], actions_selection
 
