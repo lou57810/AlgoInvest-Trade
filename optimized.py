@@ -6,13 +6,13 @@ import csv
 class OptiAlgo(Algo):
 
 	
-    def __init__(self, file, max_price):
-        super().__init__(file, max_price)
-        self.file = file
+    def __init__(self, file_in, file_out, max_price):
+        super().__init__(file_in, file_out, max_price)        
         self.max_price = max_price
+        
 
     def algo_generic(self):        
-        data = self.get_datas(self.file)            # tableau des actions avec prix et benefices non triés
+        data = self.get_datas(self.file_in)            # tableau des actions avec prix et benefices non triés
         self.dynamic_algo(data, self.max_price)        
     
     def dynamic_algo(self, data, max_price):
@@ -21,7 +21,7 @@ class OptiAlgo(Algo):
         for i in range(1, len(data) + 1):               # parcours des y actions            
             for w in range(1, max_price + 1):           # parcours des prix     # w=  1-->501            
                 if float(data[i - 1].price) <= w:         # si prix précédent < prix actuel < max_price                    
-                    matrice[i][w] = max(data[i - 1].benefit + matrice[i - 1][int(w - data[i - 1].price)], matrice[i - 1][w])                    
+                    matrice[i][w] = max(float(data[i - 1].benefit) + matrice[i - 1][int(w - float(data[i - 1].price))], matrice[i - 1][w])                    
                 else:                
                     matrice[i][w] = matrice[i - 1][w]
     
@@ -36,7 +36,7 @@ class OptiAlgo(Algo):
                 actions_selection.append(e)            
                 w -= round(float(float(e.price)))
             n -= 1
-        print('action_selection:', actions_selection)
+        #print('action_selection:', actions_selection)
         super().display_algo_data(actions_selection)    
-        #return matrice[-1][-1], actions_selection
+        
 

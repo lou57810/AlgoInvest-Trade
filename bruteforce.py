@@ -6,15 +6,15 @@ from algo import Algo
        
 class Binary(Algo):
 
-    def __init__(self, file, max_price):
-        super().__init__(file, max_price)        
+    def __init__(self, file_in, file_out, max_price):
+        super().__init__(file_in, file_out, max_price)        
         self.sumPrice = 0
         self.sumBenefit = 0
 
     def algo_generic(self):
-        data = super().get_datas(self.file)
+        data = self.get_datas(self.file_in)
         self.bin_increment(data, 2**len(data))        
-        super().display_algo_data(self.best_panel)
+        self.display_algo_data(self.best_panel)
 
     # ------------------ Brut Force Solution1 (binaire): ----------------    
     def select_best_binary_value(self, val, panel_actions):  # val = bin(i)
