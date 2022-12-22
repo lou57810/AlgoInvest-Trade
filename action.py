@@ -1,11 +1,7 @@
-import csv
-import os
-
 
 class Action:
 
-
-    def __init__(self, name, price, benefit):        
+    def __init__(self, name, price, benefit):
         self.name = name
         self.price = price
         self.benefit = benefit
@@ -15,16 +11,3 @@ class Action:
 
     def __repr__(self):
         return str(self.name) + ' ' + str(self.price) + ' ' + str(self.benefit)
-
-    
-
- 
-
-
-
-
-
-
-
-		
-
