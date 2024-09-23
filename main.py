@@ -43,24 +43,24 @@ def main():
                                 "CsvData/datatest.csv", 500)
         sol_brut_dyn.execute()
     elif option == 5:
-        sol_brut = OptiAlgo("CsvData/dataset1_Python+P7.csv",
+        sol_opti = OptiAlgo("CsvData/dataset1_Python+P7.csv",
                             "CsvData/dataset1.csv", 500)
-        sol_brut.execute()
+        sol_opti.execute()
     elif option == 6:
-        sol_brut = OptiAlgo("CsvData/dataset2_Python+P7.csv",
+        sol_opti = OptiAlgo("CsvData/dataset2_Python+P7.csv",
                             "CsvData/dataset2.csv", 500)
-        sol_brut.execute()
+        sol_opti.execute()
     elif option == 7:
         sol_brut = Binary("CsvData/dataset1_Python+P7_20.csv",
-        "CsvData/dataset11.csv", 500)
+        		  "CsvData/dataset11.csv", 500)
         sol_brut.execute()
     elif option == 8:
         sol_brut = Binary("CsvData/dataset2_Python+P7_25.csv",
-        "CsvData/dataset12.csv", 500)
+                          "CsvData/dataset12.csv", 500)
         sol_brut.execute()
     elif option == 9:
         sol_brut = Recursiv("CsvData/dataset2_Python+P7_25.csv",
-        "CsvData/dataset12.csv", 500)
+                            "CsvData/dataset12.csv", 500)
         sol_brut.execute()
     elif option == 0:
         print('Sortie programme.')
